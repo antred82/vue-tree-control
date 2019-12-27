@@ -13,6 +13,7 @@
         <!--<ul class="folder" id="head" >
             <li><img src="../assets/left.png" height="10" width="10">test<ul class="folder"><li> ttt </li></ul></li>
         </ul>-->
+        {{nodedata["head"].name}}
         <folder id="head" v-bind:nodedata="nodedata"></folder>
       </section>
   </div>
@@ -68,8 +69,9 @@ export default {
             curSelNode: "head",
             nodedata:{
                 "head":{type:"folder",name:"test",url:"./",child:["test2","test3"]},
-                "test2":{type:"folder", name: "hello", url:"./test",child:[]},
-                "test3":{type:"file", name: "hello.cpp", url:"./test",child:[]}
+                "test2":{type:"folder", name: "hello", url:"./test",child:["test4"]},
+                "test3":{type:"file", name: "hello.cpp", url:"./test",child:[]},
+                "test4":{type:"file", name: "test.cpp", url:"./test",child:[]}
             }
         }
     }
