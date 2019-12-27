@@ -1,4 +1,4 @@
-# mytreelist
+# vue-tree-control
 
 ## Project setup
 ```
