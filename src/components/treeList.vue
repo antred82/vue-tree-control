@@ -13,17 +13,16 @@
         <!--<ul class="folder" id="head" >
             <li><img src="../assets/left.png" height="10" width="10">test<ul class="folder"><li> ttt </li></ul></li>
         </ul>-->
-        {{nodedata["head"].name}}
-        <folder id="head" v-bind:nodedata="nodedata"></folder>
+        <treeheader v-bind:nodedata="nodedata"></treeheader>
       </section>
   </div>
 </template>
 
 <script>
-import folder from "./folder.vue"
+import treeheader from "./header.vue"
 
 export default {
-    components:{folder},
+    components:{treeheader},
 
     mounted: function(){
         var self = this
@@ -92,6 +91,11 @@ ul.folder{
     text-align: left;
     padding-inline-start: 10px;
     margin-block-start: 3px;
+}
+
+li{
+    margin-block-start: 3px;
+    background-color: grey;
 }
 
 table{

@@ -6,7 +6,7 @@
             </template>
             <template v-if="nodedata[child].type==='folder'">
                 <img src="../assets/left.png" height="10" width="10">
-                <img src="../assets/folder.png" height="10" width="10">{{nodedata[child].name}}
+                <img src="../assets/folder.png" height="10" width="12"> {{nodedata[child].name}}
                 <template v-if="nodedata[child].child.length > 0">
                     <folder v-bind:id="child" v-bind:nodedata="nodedata"></folder>
                 </template>
