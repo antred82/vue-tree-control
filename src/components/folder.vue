@@ -2,12 +2,16 @@
     <ul class="folder" v-bind:id="id">
         <li v-bind:class="nodedata[child].type" v-bind:key="child" v-for="child in nodedata[id].child">
             <template v-if="nodedata[child].type==='file'">
+                <div v-bind:id="child" @mouseover="mouseOver($event,child)" @mouseout="mouseOut($event,child)">
                 <!--<img src="../assets/left.png" height="10" width="10">-->{{nodedata[child].name}}
+                </div>
             </template>
             <template v-if="nodedata[child].type==='folder'">
-                <img src="../assets/left.png" height="10" width="10">
-                <img src="../assets/folder.png" height="10" width="12"> {{nodedata[child].name}}
-                <template v-if="nodedata[child].child.length > 0">
+                <div v-bind:id="child" @mouseover="mouseOver($event,child)" @mouseout="mouseOut($event,child)" @click="itemClick($event,child)">
+                    <img v-bind:src="FolderShowImage" height="10" width="10">
+                    <img src="../assets/folder.png" height="10" width="12"> {{nodedata[child].name}}
+                </div>
+                <template v-if="nodedata[child].child.length > 0 && nodedata[child].isShow === true">
                     <folder v-bind:id="child" v-bind:nodedata="nodedata"></folder>
                 </template>
             </template>
@@ -23,7 +27,30 @@ export default {
     props:[
         "id",
         "nodedata"
-    ]
+    ],
+    methods:{
+        mouseOver : function (event,i_id){
+            document.querySelector("#"+i_id).style.backgroundColor = "grey"
+        },
+        mouseOut : function(event,i_id){
+            document.querySelector("#"+i_id).style.backgroundColor = "white"
+        },
+        itemClick: function(event, i_id){
+            if(this.nodedata[i_id].isShow === true){
+                this.FolderShowImage = require("../assets/down.png")
+            }
+            else{
+                this.FolderShowImage = require("../assets/left.png")
+            }
+            this.nodedata[i_id].isShow = !this.nodedata[i_id].isShow
+        }
+    },
+    data:function(){
+        return {
+            FolderShowImage: require("../assets/left.png")
+
+        }
+    }
 
 }
 </script>

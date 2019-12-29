@@ -4,7 +4,7 @@
           <table>
               <tr class="menubar">
                   <td class="menutitle">File list</td>
-                  <td class="newFolderCol"><img class="newFolder" src="../assets/folder_new.png" height="25" width="25"></td>
+                  <td class="newFolderCol"><img class="newFolder" src="../assets/folder_new.png" height="25" width="25" @click="makeNewFolder"></td>
                   <td class="newFileCol"><img class="newFile" src="../assets/file_new.png" height="25" width="25"></td>
               </tr>
           </table>
@@ -59,6 +59,9 @@ export default {
             var treeListObj = document.querySelector(".mytreelist")
             this.listWidth = treeListObj.offsetWidth
             this.listHeight = treeListObj.offsetHeight
+        },
+        makeNewFolder: function(){
+
         }
     },
     data: function(){
@@ -67,10 +70,10 @@ export default {
             listHeight : 0,
             curSelNode: "head",
             nodedata:{
-                "head":{type:"folder",name:"test",url:"./",child:["test2","test3"]},
-                "test2":{type:"folder", name: "hello", url:"./test",child:["test4"]},
-                "test3":{type:"file", name: "hello.cpp", url:"./test",child:[]},
-                "test4":{type:"file", name: "test.cpp", url:"./test",child:[]}
+                "head":{type:"folder",name:"test",url:"./",isShow:true, parent:"",child:["test2","test3"]},
+                "test2":{type:"folder", name: "hello", url:"./test",isShow:true, parent:"head",child:["test4"]},
+                "test3":{type:"file", name: "hello.cpp", url:"./test",isShow:true, parent:"head",child:[]},
+                "test4":{type:"file", name: "test.cpp", url:"./test",isShow:true, parent:"test2",child:[]}
             }
         }
     }
@@ -95,7 +98,6 @@ ul.folder{
 
 li{
     margin-block-start: 3px;
-    background-color: grey;
 }
 
 table{
