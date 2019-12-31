@@ -5,7 +5,7 @@
               <tr class="menubar">
                   <td class="menutitle">File list</td>
                   <td class="newFolderCol"><img class="newFolder" src="../assets/folder_new.png" height="25" width="25" @click="makeNewFolder"></td>
-                  <td class="newFileCol"><img class="newFile" src="../assets/file_new.png" height="25" width="25"></td>
+                  <td class="newFileCol"><img class="newFile" src="../assets/file_new.png" height="25" width="25" @click="makeNewFile"></td>
               </tr>
           </table>
       </nav>
@@ -13,7 +13,7 @@
         <!--<ul class="folder" id="head" >
             <li><img src="../assets/left.png" height="10" width="10">test<ul class="folder"><li> ttt </li></ul></li>
         </ul>-->
-        <treeheader v-bind:nodedata="nodedata"></treeheader>
+        <treeheader v-bind:nodedata="nodedata" v-bind:callback="callback"></treeheader>
       </section>
   </div>
 </template>
@@ -53,6 +53,10 @@ export default {
             //console.log("click new file")
         })
 
+        this.setFileItemClickHandler(function(nodeItem,id){
+            console.log("click item name:"+nodeItem.name)
+        })
+
     },
     methods:{
         drawTreeControl:function(){
@@ -60,16 +64,31 @@ export default {
             this.listWidth = treeListObj.offsetWidth
             this.listHeight = treeListObj.offsetHeight
         },
-        makeNewFolder: function(){
+        makeNewFolder: function(name){
 
+        },
+
+        makeNewFile: function(name){
+
+        },
+        setNodeData: function(key,obj){
+            this.nodedata[key] = obj
+            this.nodedata[obj.parent].child.push(key)
+        },
+        setAllNodeData: function(obj){
+            this.nodedata = obj
+        },
+        setFileItemClickHandler: function(callback){
+            this.callback = callback
         }
     },
     data: function(){
         return {
             listWidth : 0,
             listHeight : 0,
-            curSelNode: "head",
+            callback: Object,
             nodedata:{
+                "lastSelKey":"",
                 "head":{type:"folder",name:"test",url:"./",isShow:true, parent:"",child:["test2","test3"]},
                 "test2":{type:"folder", name: "hello", url:"./test",isShow:true, parent:"head",child:["test4"]},
                 "test3":{type:"file", name: "hello.cpp", url:"./test",isShow:true, parent:"head",child:[]},

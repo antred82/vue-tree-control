@@ -5,7 +5,7 @@
             <img src="../assets/folder.png" height="10" width="12">
             {{nodedata["head"].name}}
         </div>
-        <folder id="head" v-bind:nodedata="nodedata"></folder>
+        <folder id="head" v-bind:nodedata="nodedata" v-bind:callback="callback"></folder>
     </div>
   
 </template>
@@ -18,7 +18,8 @@ export default {
     components:{folder},
     props:[
         "id",
-        "nodedata"
+        "nodedata",
+        "callback"
     ],
     methods:{
         mouseOver : function (event){
